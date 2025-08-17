@@ -105,7 +105,7 @@ produce = {
     },
     "arugula": {
         "price": 1200,
-        "stock": 30
+        "stock": 0
     },
     "spinach": {
         "price": 500,
@@ -132,6 +132,49 @@ produce = {
 shopping_list = ["beets", "arugula", "spinach", "spinach", "apples", "okra", "pomegranates", "okra"]
 
 
+# def calculate_bill(inventory, customer_list):
+   # """
+   # Processes a customer's shopping list against the store's inventory,
+   # then calculates and prints the final bill.
+  #  """
+   # total_cost = 0
+   # purchased_items = {}
+
+   # print("Processing your shopping list....")
+
+   # for item in customer_list:
+       # if item in inventory:
+          #  if inventory[item]["stock"] > 0:
+               # price = inventory[item]["price"]
+               # total_cost += price
+              #  inventory[item]["stock"] -= 1
+
+               # if item in purchased_items:
+                  #  purchased_items[item] += 1
+              #  else:
+                  #  purchased_items[item] = 1
+          #  else:
+              #  print(f"Note: {item} is out of stock!")
+       # else:
+          #  print(f"Note: {item} is not sold here!")
+
+   # print("\n" + "=" * 30)
+   # print("       Final Bill is")
+  #  print("=" * 30)
+
+  #  for item, quantity in purchased_items.items():
+      #  line_total = inventory[item]["price"] * quantity
+      #  print(f"- {item.capitalize()} (x{quantity}): {line_total} UShs")
+
+   # print("=" * 30)
+  #  print(f"Grand Total: {total_cost} UShs")
+   # print("-" * 30)
+
+# Run the function
+# calculate_bill(produce, shopping_list)
+
+
+
 def calculate_bill(inventory, customer_list):
     """
     Processes a customer's shopping list against the store's inventory,
@@ -154,7 +197,7 @@ def calculate_bill(inventory, customer_list):
                 else:
                     purchased_items[item] = 1
             else:
-                print(f"Note: {item} is out of stock!")
+                print(f"Sorry, {item} is currently out of stock.")
         else:
             print(f"Note: {item} is not sold here!")
 
@@ -170,9 +213,7 @@ def calculate_bill(inventory, customer_list):
     print(f"Grand Total: {total_cost} UShs")
     print("-" * 30)
 
-# Run the function
 calculate_bill(produce, shopping_list)
-
 
 
 
