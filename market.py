@@ -4,41 +4,40 @@
 
 # Create a dictionary to store my list of items, with price and stock
 
-produce = {
+# produce = {
 
-    "beets": {
-        "price": 1500,
-        "stock": 60
-    },
-    "arugula": {
-        "price": 1200,
-        "stock": 30
-    },
-    "spinach": {
-        "price": 500,
-        "stock": 100
-    },
-    "apples": {
-        "price": 1000,
-        "stock": 100
-    },
-    "okra": {
-        "price": 2500,
-        "stock": 40
-    },
-    "pomegranates": {
-        "price": 3000,
-        "stock": 100
-    },
-    "figs": {
-        "price": 2000,
-        "stock": 100
-    }
-}
+    # "beets": {
+        # "price": 1500,
+        # "stock": 60
+    
+    # "arugula": {
+        # "price": 1200,
+        # "stock": 30
+    
+    # "spinach": {
+        # "price": 500,
+        # "stock": 100
+    
+    # "apples": {
+        # "price": 1000,
+        # "stock": 100
+    
+    # "okra": {
+        # "price": 2500,
+        # "stock": 40
+    
+    # "pomegranates": {
+        # "price": 3000,
+        # "stock": 100
+    
+    # "figs": {
+        # "price": 2000,
+        # "stock": 100
+    
 
 # Create a shopping list of the items above
 
-shopping_list = ["beets", "arugula", "spinach", "spinach", "apples", "okra", "pomegranates", "okra"]
+# shopping_list = ["beets", "arugula", "spinach", "spinach", "apples", "okra", "pomegranates", "okra"]
 
 # Dictionary to track purchased items for the bill
 
@@ -98,48 +97,82 @@ shopping_list = ["beets", "arugula", "spinach", "spinach", "apples", "okra", "po
 # Part 3 - with reusable functions and return results like walked through above - not adding comments to explain
 
 
+produce = {
+
+    "beets": {
+        "price": 1500,
+        "stock": 60
+    },
+    "arugula": {
+        "price": 1200,
+        "stock": 30
+    },
+    "spinach": {
+        "price": 500,
+        "stock": 100
+    },
+    "apples": {
+        "price": 1000,
+        "stock": 100
+    },
+    "okra": {
+        "price": 2500,
+        "stock": 40
+    },
+    "pomegranates": {
+        "price": 3000,
+        "stock": 100
+    },
+    "figs": {
+        "price": 2000,
+        "stock": 100
+    }
+}
+
+shopping_list = ["beets", "arugula", "spinach", "spinach", "apples", "okra", "pomegranates", "okra"]
+
+
 def calculate_bill(inventory, customer_list):
     """
-        Processes a customer's shopping list against the store's inventory, then calculates and prints the final bill
+    Processes a customer's shopping list against the store's inventory,
+    then calculates and prints the final bill.
     """
-total_cost = 0
-purchased_items = {}
+    total_cost = 0
+    purchased_items = {}
 
-print("Processing your shopping list....")
+    print("Processing your shopping list....")
 
-# Loop through the list an item at a time
+    for item in customer_list:
+        if item in inventory:
+            if inventory[item]["stock"] > 0:
+                price = inventory[item]["price"]
+                total_cost += price
+                inventory[item]["stock"] -= 1
 
-for item in customer_list:
-    if item in inventory:
-        if inventory[item]["stock"] > 0:
-            price = inventory[item]["price"]
-            total_cost = total_cost + inventory[item]['price']
-            inventory[item]["stock"] = inventory[item]["stock"] - 1
-
-            if item in purchased_items:
-                purchased_items[item] = purchased_items[item] + 1
+                if item in purchased_items:
+                    purchased_items[item] += 1
+                else:
+                    purchased_items[item] = 1
             else:
-                purchased_items[item]  = 1  
-
+                print(f"Note: {item} is out of stock!")
         else:
-            print("Note:",  item,  "is out of stock!")
+            print(f"Note: {item} is not sold here!")
 
-    else:
-        print("Note:", item, "is not sold here!")
+    print("\n" + "=" * 30)
+    print("       Final Bill is")
+    print("=" * 30)
 
-print("\n" + "=" * 30)
-print("       Final Bill is")
-print("=" * 30)
+    for item, quantity in purchased_items.items():
+        line_total = inventory[item]["price"] * quantity
+        print(f"- {item.capitalize()} (x{quantity}): {line_total} UShs")
 
-# To compute the final bill vvv
+    print("=" * 30)
+    print(f"Grand Total: {total_cost} UShs")
+    print("-" * 30)
 
-for item, quantity in purchased_items.items():
-    line_total = inventory[item]["price"] * quantity
-    print(f"- {item.capitalize()} (x{quantity}): {line_total} UShs")  
-
-print("=" * 30)
-print("Grand Total:", total_cost, " UShs")
-print("-"*30)
-
+# Run the function
 calculate_bill(produce, shopping_list)
+
+
+
 
